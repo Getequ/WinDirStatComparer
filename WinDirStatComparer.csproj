@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>icons\icons8-compare-files-16.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icons\icons8-compare-files-16.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ObjectListView.Official" Version="2.9.1" />
+  </ItemGroup>
+
+</Project>
