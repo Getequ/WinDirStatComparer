@@ -65,9 +65,16 @@
             var idx = slvItem.Index;
             var citem = slvItem.Tag as CompareItem;
 
+            var good = 0;
+            var bad = 0;
             if (citem != null && citem.Children != null && citem.Children.Length > 0) {
                 foreach (var item in citem.Children) {
                     if (chSkipGoodFiles.Checked && !(item.Left?.IsFolder ?? item.Right.IsFolder) && item.GoodSize) continue;
+
+                    if (item.GoodSize)
+                        good++;
+                    else
+                        bad++;
 
                     var lvItem = new ListViewItem();
                     lvItem.ImageIndex = GetIconIndex(item);
@@ -81,6 +88,7 @@
                     lvItem.Tag = item;
                     lvView.Items.Insert(++idx, lvItem);
                 }
+                slvItem.SubItems[3].Text = slvItem.SubItems[3].Text + $" good: {good}, bad: {bad}";
             }
         }
 

@@ -198,6 +198,8 @@
             // chSkipGoodFiles
             // 
             chSkipGoodFiles.AutoSize = true;
+            chSkipGoodFiles.Checked = true;
+            chSkipGoodFiles.CheckState = CheckState.Checked;
             chSkipGoodFiles.Location = new Point(12, 170);
             chSkipGoodFiles.Name = "chSkipGoodFiles";
             chSkipGoodFiles.Size = new Size(102, 19);
