@@ -60,9 +60,9 @@ internal class Comparer {
                 roots.Add(item);
 
             idx++;
-            if (item.Left == null || item.Right == null) continue;
+            //if (item.Left == null || item.Right == null) continue;
 
-            if (!item.Left.IsFolder) continue;
+            if (!(item.Left?.IsFolder ?? false) && !(item.Right?.IsFolder ?? false)) continue;
 
             item.Children = compared.Where(x =>
                 x.Name.StartsWith(item.Name + "\\") && 
