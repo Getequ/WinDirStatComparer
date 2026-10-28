@@ -52,7 +52,7 @@
             // 
             // btnLeft
             // 
-            btnLeft.Location = new Point(98, 26);
+            btnLeft.Location = new Point(12, 26);
             btnLeft.Name = "btnLeft";
             btnLeft.Size = new Size(185, 23);
             btnLeft.TabIndex = 0;
@@ -62,7 +62,7 @@
             // btnRight
             // 
             btnRight.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnRight.Location = new Point(749, 26);
+            btnRight.Location = new Point(812, 26);
             btnRight.Name = "btnRight";
             btnRight.Size = new Size(197, 23);
             btnRight.TabIndex = 1;
@@ -72,9 +72,9 @@
             // btnCompare
             // 
             btnCompare.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnCompare.Location = new Point(400, 26);
+            btnCompare.Location = new Point(236, 26);
             btnCompare.Name = "btnCompare";
-            btnCompare.Size = new Size(245, 23);
+            btnCompare.Size = new Size(545, 23);
             btnCompare.TabIndex = 2;
             btnCompare.Text = "Compare";
             btnCompare.TextAlign = ContentAlignment.BottomCenter;
@@ -155,25 +155,25 @@
             // chName
             // 
             chName.Text = "Name";
-            chName.Width = 300;
+            chName.Width = 270;
             // 
             // chDSL
             // 
             chDSL.Text = "Physical size (left)";
             chDSL.TextAlign = HorizontalAlignment.Right;
-            chDSL.Width = 150;
+            chDSL.Width = 130;
             // 
             // chDSR
             // 
             chDSR.Text = "Physical size (right)";
             chDSR.TextAlign = HorizontalAlignment.Right;
-            chDSR.Width = 160;
+            chDSR.Width = 130;
             // 
             // chLS
             // 
             chLS.Text = "Logical size";
             chLS.TextAlign = HorizontalAlignment.Right;
-            chLS.Width = 150;
+            chLS.Width = 120;
             // 
             // label1
             // 
