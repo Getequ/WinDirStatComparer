@@ -32,11 +32,7 @@
             btnLeft = new Button();
             btnRight = new Button();
             btnCompare = new Button();
-            tbLeftFile = new TextBox();
-            tbRightFile = new TextBox();
             imageList1 = new ImageList(components);
-            tbLeftFolder = new TextBox();
-            tbRightFolder = new TextBox();
             lvView = new ListView();
             chFsType = new ColumnHeader();
             chLeftState = new ColumnHeader();
@@ -48,6 +44,12 @@
             label1 = new Label();
             lbSelCount = new Label();
             chSkipGoodFiles = new CheckBox();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            tbRightFolder = new TextBox();
+            tbRightFile = new TextBox();
+            tbLeftFile = new TextBox();
+            tbLeftFolder = new TextBox();
+            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnLeft
@@ -72,29 +74,14 @@
             // btnCompare
             // 
             btnCompare.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            btnCompare.Location = new Point(236, 26);
+            btnCompare.Location = new Point(203, 26);
             btnCompare.Name = "btnCompare";
-            btnCompare.Size = new Size(545, 23);
+            btnCompare.Size = new Size(603, 23);
             btnCompare.TabIndex = 2;
             btnCompare.Text = "Compare";
             btnCompare.TextAlign = ContentAlignment.BottomCenter;
             btnCompare.UseVisualStyleBackColor = true;
             btnCompare.Click += btnCompare_Click;
-            // 
-            // tbLeftFile
-            // 
-            tbLeftFile.Location = new Point(12, 79);
-            tbLeftFile.Name = "tbLeftFile";
-            tbLeftFile.Size = new Size(502, 23);
-            tbLeftFile.TabIndex = 3;
-            tbLeftFile.TextChanged += tbLeftFile_TextChanged;
-            // 
-            // tbRightFile
-            // 
-            tbRightFile.Location = new Point(520, 79);
-            tbRightFile.Name = "tbRightFile";
-            tbRightFile.Size = new Size(489, 23);
-            tbRightFile.TabIndex = 4;
             // 
             // imageList1
             // 
@@ -108,28 +95,14 @@
             imageList1.Images.SetKeyName(4, "left.bmp");
             imageList1.Images.SetKeyName(5, "right.bmp");
             // 
-            // tbLeftFolder
-            // 
-            tbLeftFolder.Location = new Point(12, 129);
-            tbLeftFolder.Name = "tbLeftFolder";
-            tbLeftFolder.Size = new Size(502, 23);
-            tbLeftFolder.TabIndex = 6;
-            // 
-            // tbRightFolder
-            // 
-            tbRightFolder.Location = new Point(520, 129);
-            tbRightFolder.Name = "tbRightFolder";
-            tbRightFolder.Size = new Size(489, 23);
-            tbRightFolder.TabIndex = 7;
-            // 
             // lvView
             // 
             lvView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lvView.Columns.AddRange(new ColumnHeader[] { chFsType, chLeftState, chRightState, chName, chDSL, chDSR, chLS });
             lvView.FullRowSelect = true;
-            lvView.Location = new Point(12, 195);
+            lvView.Location = new Point(12, 161);
             lvView.Name = "lvView";
-            lvView.Size = new Size(997, 475);
+            lvView.Size = new Size(997, 509);
             lvView.SmallImageList = imageList1;
             lvView.TabIndex = 8;
             lvView.UseCompatibleStateImageBehavior = false;
@@ -161,19 +134,19 @@
             // 
             chDSL.Text = "Physical size (left)";
             chDSL.TextAlign = HorizontalAlignment.Right;
-            chDSL.Width = 130;
+            chDSL.Width = 110;
             // 
             // chDSR
             // 
             chDSR.Text = "Physical size (right)";
             chDSR.TextAlign = HorizontalAlignment.Right;
-            chDSR.Width = 130;
+            chDSR.Width = 115;
             // 
             // chLS
             // 
             chLS.Text = "Logical size";
             chLS.TextAlign = HorizontalAlignment.Right;
-            chLS.Width = 120;
+            chLS.Width = 110;
             // 
             // label1
             // 
@@ -200,32 +173,81 @@
             chSkipGoodFiles.AutoSize = true;
             chSkipGoodFiles.Checked = true;
             chSkipGoodFiles.CheckState = CheckState.Checked;
-            chSkipGoodFiles.Location = new Point(12, 170);
+            chSkipGoodFiles.Location = new Point(12, 136);
             chSkipGoodFiles.Name = "chSkipGoodFiles";
             chSkipGoodFiles.Size = new Size(102, 19);
             chSkipGoodFiles.TabIndex = 11;
             chSkipGoodFiles.Text = "skip good files";
             chSkipGoodFiles.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(tbRightFolder, 1, 1);
+            tableLayoutPanel1.Controls.Add(tbRightFile, 1, 0);
+            tableLayoutPanel1.Controls.Add(tbLeftFile, 0, 0);
+            tableLayoutPanel1.Controls.Add(tbLeftFolder, 0, 1);
+            tableLayoutPanel1.Location = new Point(12, 55);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Size = new Size(997, 63);
+            tableLayoutPanel1.TabIndex = 12;
+            // 
+            // tbRightFolder
+            // 
+            tbRightFolder.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbRightFolder.Location = new Point(501, 34);
+            tbRightFolder.Name = "tbRightFolder";
+            tbRightFolder.Size = new Size(493, 23);
+            tbRightFolder.TabIndex = 9;
+            // 
+            // tbRightFile
+            // 
+            tbRightFile.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbRightFile.Location = new Point(501, 3);
+            tbRightFile.Name = "tbRightFile";
+            tbRightFile.Size = new Size(493, 23);
+            tbRightFile.TabIndex = 8;
+            // 
+            // tbLeftFile
+            // 
+            tbLeftFile.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbLeftFile.Location = new Point(3, 3);
+            tbLeftFile.Name = "tbLeftFile";
+            tbLeftFile.Size = new Size(492, 23);
+            tbLeftFile.TabIndex = 4;
+            // 
+            // tbLeftFolder
+            // 
+            tbLeftFolder.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            tbLeftFolder.Location = new Point(3, 34);
+            tbLeftFolder.Name = "tbLeftFolder";
+            tbLeftFolder.Size = new Size(492, 23);
+            tbLeftFolder.TabIndex = 7;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1021, 703);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(chSkipGoodFiles);
             Controls.Add(lbSelCount);
             Controls.Add(label1);
             Controls.Add(lvView);
-            Controls.Add(tbRightFolder);
-            Controls.Add(tbLeftFolder);
-            Controls.Add(tbRightFile);
-            Controls.Add(tbLeftFile);
             Controls.Add(btnCompare);
             Controls.Add(btnRight);
             Controls.Add(btnLeft);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             Text = "WDS Comparer";
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -235,10 +257,6 @@
         private Button btnLeft;
         private Button btnRight;
         private Button btnCompare;
-        private TextBox tbLeftFile;
-        private TextBox tbRightFile;
-        private TextBox tbLeftFolder;
-        private TextBox tbRightFolder;
         private ImageList imageList1;
         private ListView lvView;
         private ColumnHeader chFsType;
@@ -251,5 +269,10 @@
         private Label label1;
         private Label lbSelCount;
         private CheckBox chSkipGoodFiles;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TextBox tbRightFolder;
+        private TextBox tbRightFile;
+        private TextBox tbLeftFile;
+        private TextBox tbLeftFolder;
     }
 }

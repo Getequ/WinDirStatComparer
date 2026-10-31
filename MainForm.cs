@@ -4,11 +4,11 @@
         public MainForm() {
             InitializeComponent();
 
-            tbLeftFile.Text = "C:\\games\\yd_report__work.json";
-            tbRightFile.Text = "C:\\games\\yd_report__hp.json";
+            tbLeftFile.Text = "C:\\share\\yd_report__work.json";
+            tbRightFile.Text = "C:\\share\\yd_report__chuwi.json";
 
             tbLeftFolder.Text = "D:\\yd\\Yandex.Disk\\2017";
-            tbRightFolder.Text = "C:\\Users\\Денис\\Yandex.Disk\\2017";
+            tbRightFolder.Text = "C:\\Users\\Denis\\Yandex.Disk\\2017";
         }
 
         private void tbLeftFile_TextChanged(object sender, EventArgs e) {
@@ -36,7 +36,7 @@
                 lvItem.SubItems.Add(item.Name);
                 lvItem.SubItems.Add(item.Left != null ? FormatFileSize(item.Left.PhysicalSize) : "");
                 lvItem.SubItems.Add(item.Right != null ? FormatFileSize(item.Right.PhysicalSize) : "");
-                lvItem.SubItems.Add(FormatFileSize(item.Left?.LogicalSize ?? item.Right.LogicalSize));
+                lvItem.SubItems.Add(FormatFileSize(Math.Max(item.Left?.LogicalSize ?? 0, item.Right?.LogicalSize ?? 0)));
                 lvItem.Tag = item;
                 lvView.Items.Add(lvItem);
             }
@@ -69,7 +69,10 @@
             var bad = 0;
             if (citem != null && citem.Children != null && citem.Children.Length > 0) {
                 foreach (var item in citem.Children) {
-                    if (chSkipGoodFiles.Checked && !(item.Left?.IsFolder ?? item.Right.IsFolder) && item.GoodSize) continue;
+                    if (chSkipGoodFiles.Checked && !(item.Left?.IsFolder ?? item.Right.IsFolder) && item.GoodSize) {
+                        good++;
+                        continue;
+                    }
 
                     if (item.GoodSize)
                         good++;
@@ -84,7 +87,7 @@
                     lvItem.SubItems.Add(item.Name);
                     lvItem.SubItems.Add(item.Left != null ? FormatFileSize(item.Left.PhysicalSize) : "");
                     lvItem.SubItems.Add(item.Right != null ? FormatFileSize(item.Right.PhysicalSize) : "");
-                    lvItem.SubItems.Add(FormatFileSize(item.Left?.LogicalSize ?? item.Right.LogicalSize));
+                    lvItem.SubItems.Add(FormatFileSize(Math.Max(item.Left?.LogicalSize ?? 0, item.Right?.LogicalSize ?? 0)));
                     lvItem.Tag = item;
                     lvView.Items.Insert(++idx, lvItem);
                 }
@@ -99,7 +102,7 @@
                 items.Add(item.Tag as CompareItem);
             }
 
-            lbSelCount.Text = items.Count.ToString() + "; Logical ize: " + FormatFileSize(items.Sum(x => x.Left?.LogicalSize ?? x.Right.LogicalSize));
+            lbSelCount.Text = items.Count.ToString() + "; Logical size: " + FormatFileSize(items.Sum(x => Math.Max(x.Left?.LogicalSize ?? 0, x.Right?.LogicalSize ?? 0)));
         }
     }
 }
