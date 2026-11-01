@@ -28,11 +28,14 @@
             lvView.Items.Clear();
 
             foreach (var item in items) {
-                if (chSkipGoodFiles.Checked && !item.Left.IsFolder && item.GoodSize) continue;
+                if (chSkipGoodFiles.Checked && !item.IsFolder && item.GoodSize) {
+                    continue;
+                }
                 var lvItem = new ListViewItem();
                 lvItem.ImageIndex = GetIconIndex(item);
                 var leftState = lvItem.SubItems.Add("");
                 var rightState = lvItem.SubItems.Add("");
+
                 lvItem.SubItems.Add(item.Name);
                 lvItem.SubItems.Add(item.Left != null ? FormatFileSize(item.Left.PhysicalSize) : "");
                 lvItem.SubItems.Add(item.Right != null ? FormatFileSize(item.Right.PhysicalSize) : "");
@@ -47,15 +50,17 @@
         }
 
         private int GetIconIndex(CompareItem item) {
-            if (item.Left?.IsFolder ?? item.Right.IsFolder) {
+            if (item.IsFolder) {
                 if (item.GoodSize)
                     return 0;
                 else
                     return 1;
             }
 
-            if (item.GoodSize)
+            if (item.BothGoodSize)
                 return 2;
+            if (item.GoodSize)
+                return 6;
             else
                 return 3;
         }
@@ -69,14 +74,21 @@
             var bad = 0;
             if (citem != null && citem.Children != null && citem.Children.Length > 0) {
                 foreach (var item in citem.Children) {
-                    if (chSkipGoodFiles.Checked && !(item.Left?.IsFolder ?? item.Right.IsFolder) && item.GoodSize) {
+                    if (chSkipGoodFiles.Checked && !item.IsFolder && item.BothGoodSize) {
                         good++;
+                        continue;
+                    }
+                    if (chSkipLeftGood.Checked && !item.IsFolder && (item.Left?.GoodSize ?? false)) {
+                        continue;
+                    }
+                    if (chSkipRightGood.Checked && !item.IsFolder && (item.Right?.GoodSize ?? false)) {
                         continue;
                     }
 
                     if (item.GoodSize)
                         good++;
                     else
+                    if (!item.IsFolder)
                         bad++;
 
                     var lvItem = new ListViewItem();
@@ -84,6 +96,25 @@
 
                     var leftState = lvItem.SubItems.Add("");
                     var rightState = lvItem.SubItems.Add("");
+
+                    if (lvItem.ImageIndex == 6) {
+                        lvItem.UseItemStyleForSubItems = false;
+                        if (item.Left?.GoodSize ?? false) {
+                            leftState.ForeColor = Color.Green;
+                        }
+                        else {
+                            leftState.ForeColor = Color.Red;
+                        }
+                        if (item.Right?.GoodSize ?? false) {
+                            rightState.ForeColor = Color.Green;
+                        }
+                        else {
+                            rightState.ForeColor = Color.Red;
+                        }
+                        leftState.Text = "#";
+                        rightState.Text = "#";
+                    }
+
                     lvItem.SubItems.Add(item.Name);
                     lvItem.SubItems.Add(item.Left != null ? FormatFileSize(item.Left.PhysicalSize) : "");
                     lvItem.SubItems.Add(item.Right != null ? FormatFileSize(item.Right.PhysicalSize) : "");

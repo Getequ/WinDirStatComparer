@@ -88,7 +88,7 @@ public class FsItem {
     public FsItem[] Children { get; set; }
     public int _idx { get; set; }
 
-    public bool GoodSize => PhysicalSize == LogicalSize || (PhysicalSize > LogicalSize && PhysicalSize - LogicalSize < 4096);
+    public bool GoodSize => PhysicalSize == LogicalSize || (PhysicalSize > LogicalSize && (IsFolder || PhysicalSize - LogicalSize < 4096));
     public override bool Equals(object? obj) {
         return obj is FsItem fsi && fsi.Name == Name && fsi.LogicalSize == LogicalSize && fsi.PhysicalSize == PhysicalSize;
     }
@@ -101,6 +101,8 @@ public class CompareItem {
     public CompareItem[] Children { get; set; }
     public bool FilesEqual => Left.Equals(Right);
     public bool GoodSize => ((Left != null && Right != null && Left.LogicalSize == Right.LogicalSize) || Left == null || Right == null) && ((Left?.GoodSize ?? false) || (Right?.GoodSize ?? false));
+    public bool BothGoodSize => (Left?.GoodSize ?? false) && (Right?.GoodSize ?? false);
+    public bool IsFolder => Left?.IsFolder ?? Right.IsFolder;
 }
 
 internal static class MyExtensions {
